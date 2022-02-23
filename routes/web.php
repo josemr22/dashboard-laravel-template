@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ArbitratorController;
+use App\Models\Arbitrator;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return redirect()->route('arbitrators');
 });
+
+Route::view('/arbitros', 'dashboard.arbitros')->name('arbitrators');
+Route::view('/sorteo', 'dashboard.sorteo')->name('sorteo');

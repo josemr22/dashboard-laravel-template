@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArbitratorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/arbitrators', [ArbitratorController::class, 'getArbitrators'])->name('arbitrators.get');
+
+Route::post('/arbitrators', [ArbitratorController::class, 'store'])->name('arbitrators.store');
+
+Route::put('/arbitrators/{arbitrator}', [ArbitratorController::class, 'update'])->name('arbitrators.update');
+
+Route::put('/arbitrators-state/{arbitrator}', [ArbitratorController::class, 'updateState'])->name('arbitrators.updateState');
+
+Route::put('/arbitrators', [ArbitratorController::class, 'resetArbitratorsState'])->name('arbitrators.resetState');
+
+Route::delete('/arbitrators', [ArbitratorController::class, 'delete'])->name('arbitrators.delete');

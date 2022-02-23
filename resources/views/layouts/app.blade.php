@@ -20,6 +20,10 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+    {{-- DataTable --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+    @livewireStyles
+
 </head>
 
 <body id="page-top">
@@ -74,9 +78,14 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="{{route('arbitrators')}}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Gestión de Árbitros</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('sorteo')}}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Sorteo</span></a>
             </li>
 
             <!-- Divider -->
@@ -132,8 +141,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                    @yield('content')
 
                 </div>
                 <!-- /.container-fluid -->
@@ -182,6 +190,9 @@
         </div>
     </div>
 
+    {{-- Main Modal --}}
+    <!-- Modal -->
+
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -191,6 +202,15 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/js/sb-admin-2.min.js"></script>
+
+    {{-- DataTable --}}
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js">
+    </script>
+
+    {{-- SweetAlert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @livewireScripts
+    @stack('scripts')
 
 </body>
 
