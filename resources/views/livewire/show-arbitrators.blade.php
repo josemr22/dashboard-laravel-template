@@ -1,6 +1,6 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary"></h6>
         <button wire:click="updateAllState()" class="btn btn-primary" id="newArbitratorBtn">Marcar todos como
             Disponibles</button>
     </div>
@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Fecha de Creación</th>
+                        <th>Fecha de Elección</th>
                         <th>Acciones</th>
                         <th>Disponibilidad</th>
                     </tr>
@@ -18,8 +18,14 @@
                 <tbody>
                     @foreach($arbitrators as $arbitrator)
                     <tr>
-                        <td>{{$arbitrator->name}}</td>
-                        <td>{{$arbitrator->created_at}}</td>
+                        <td>
+                            <div class="d-flex align-content-center">
+                                <img src="{{$arbitrator->photo}}" alt="" width="30px" style="border-radius: 50%"
+                                    class="mr-2">
+                                <span>{{$arbitrator->name}}</span>
+                            </div>
+                        </td>
+                        <td>{{$arbitrator->state ? $arbitrator->at_choice : '---'}}</td>
                         <td class="d-flex">
                             <button class="btn btn-sm btn-outline-primary" wire:click="edit({{$arbitrator->id}})"><i
                                     class="fa fa-edit"></i></button>

@@ -18,8 +18,18 @@
                     <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
-                    <label for="name" class="col-form-label">Nombre</label>
-                    <input type="text" class="form-control" id="inputName">
+                    <div>
+                        <label for="inputName" class="col-form-label">Nombre</label>
+                        <input type="text" class="form-control" id="inputName">
+                    </div>
+                    <div>
+                        <label for="inputDescription" class="col-form-label">Descripción</label>
+                        <input type="text" class="form-control" id="inputDescription">
+                    </div>
+                    <div>
+                        <label for="inputImage" class="col-form-label">Image (300x300)</label>
+                        <input type="file" class="form-control" id="inputImage">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

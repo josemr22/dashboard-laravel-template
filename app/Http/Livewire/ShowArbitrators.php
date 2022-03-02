@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Arbitrator;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class ShowArbitrators extends Component
@@ -20,17 +21,40 @@ class ShowArbitrators extends Component
         return view('livewire.show-arbitrators', compact('arbitrators'));
     }
 
-    public function store($nameValue)
+    function storeImage($base64)
     {
+        $base_to_php = explode(',', $base64);
+        $data = base64_decode($base_to_php[1]);
+        $filename = time() . ".png";
+        $filepath = public_path("storage/$filename");
+        file_put_contents($filepath, $data);
+        return $filename;
+    }
+
+    public function store($data)
+    {
+        $data = json_decode($data);
         $arbitrator = new Arbitrator();
-        $arbitrator->name = $nameValue;
+        $arbitrator->name = $data->name;
+        $arbitrator->description = $data->description;
+        if (isset($data->image)) {
+            $filename = $this->storeImage($data->image);
+            $arbitrator->image = $filename;
+        }
         $arbitrator->save();
         $this->emit("stored");
     }
 
-    public function update($nameValue)
+    public function update($data)
     {
-        $this->arbitrator->name = $nameValue;
+        $data = json_decode($data);
+
+        $this->arbitrator->name = $data->name;
+        $this->arbitrator->description = $data->description;
+        if (isset($data->image)) {
+            $filename = $this->storeImage($data->image);
+            $this->arbitrator->image = $filename;
+        }
         $this->arbitrator->save();
         $this->emit("updated");
     }
@@ -50,6 +74,9 @@ class ShowArbitrators extends Component
     public function changeState(Arbitrator $arbitrator)
     {
         $arbitrator->state = !$arbitrator->state;
+        if ($arbitrator->state) {
+            $arbitrator->at_choice = \Carbon\Carbon::now();
+        }
         $arbitrator->save();
     }
 

@@ -72,7 +72,7 @@
                 text: arbitrator.name,
                 allowOutsideClick: false
             })
-        }, 2000);
+        }, 3000);
     });
 </script>
 @endpush

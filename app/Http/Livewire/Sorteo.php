@@ -19,6 +19,7 @@ class Sorteo extends Component
     {
         $randomArbitrator = $this->arbitrators->random();
         $randomArbitrator->state = true;
+        $randomArbitrator->at_choice = \Carbon\Carbon::now();
         $randomArbitrator->save();
         $this->emit('randomSelected', $randomArbitrator);
     }
