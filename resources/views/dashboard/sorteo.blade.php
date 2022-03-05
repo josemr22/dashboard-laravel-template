@@ -79,7 +79,7 @@
             html:
                 `
                 <p style="font-size: 2.5rem; font-weight: bold;">${arbitrator.name}</p>
-                <img src="${arbitrator.photo}" width="100px">
+                <img src="${arbitrator.photo}" width="250px">
                 <p>${arbitrator.description}</p>
                 `,
             showCloseButton: false,
