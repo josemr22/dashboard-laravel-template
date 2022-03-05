@@ -126,6 +126,11 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <a type="button" class="dropdown-item" style="cursor: pointer"
+                                    id="changePasswordButton">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cambiar Contraseña
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -185,8 +190,31 @@
         </div>
     </div>
 
-    {{-- Main Modal --}}
-    <!-- Modal -->
+    <!-- Modal Contraseña -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="changePasswordForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Actualizar Contraseña</h5>
+                        <button type="button" class="btn btn-close" data-bs-dismiss="modal"
+                            aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label for="new-password" class="col-form-label">Nueva Contraseña</label>
+                            <input type="password" class="form-control" id="new-password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-close"
+                            data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="/vendor/jquery/jquery.min.js"></script>
@@ -206,6 +234,47 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @livewireScripts
     @stack('scripts')
+
+    <script>
+        const passwordModal = new bootstrap.Modal(document.getElementById("passwordModal"));
+
+        const changePassword = () => {
+            console.log('cambiando contraseña')
+        }
+        changePasswordButton.addEventListener("click", () => passwordModal.show());
+
+        changePasswordForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const newPassword = document.querySelector("#new-password").value;
+            if(!newPassword){
+                Swal.fire('Bien Hecho!', `Ingrese la nueva contraseña`, 'error');
+                return;
+            }
+            if(newPassword.length < 9){
+                Swal.fire('Bien Hecho!', `Ingrese al menos 8 caracteres`, 'error');
+                return;
+            }
+
+            fetch("/api/change-password", {
+            method: 'PUT', // or 'PUT'
+            body: JSON.stringify({id: {{auth()->user()->id}}, newPassword}), // data can be `string` or {object}!
+            headers:{
+                'Content-Type': 'application/json'
+            }
+            }).then(res => res.json())
+            .then(response => {
+                Swal.fire('Bien Hecho!', 'La contraseña ha sido actualizada', 'success');
+                document.querySelector("#new-password").value = '';
+                passwordModal.hide()
+            })
+            .catch(error => {
+                console.log(error);
+                alert('Ocurrió un error');
+            });
+        });
+
+        document.querySelectorAll(".btn-close").forEach(btn => btn.addEventListener("click", () => passwordModal.hide()));
+    </script>
 
 </body>
 

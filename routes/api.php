@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArbitratorController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/arbitrators', [ArbitratorController::class, 'getArbitrators'])->name('arbitrators.get');
+Route::put('/change-password', [UserController::class, 'changePassword']);
+// Route::get('/arbitrators', [ArbitratorController::class, 'getArbitrators'])->name('arbitrators.get');
 
-Route::post('/arbitrators', [ArbitratorController::class, 'store'])->name('arbitrators.store');
+// Route::post('/arbitrators', [ArbitratorController::class, 'store'])->name('arbitrators.store');
 
-Route::put('/arbitrators/{arbitrator}', [ArbitratorController::class, 'update'])->name('arbitrators.update');
+// Route::put('/arbitrators/{arbitrator}', [ArbitratorController::class, 'update'])->name('arbitrators.update');
 
-Route::put('/arbitrators-state/{arbitrator}', [ArbitratorController::class, 'updateState'])->name('arbitrators.updateState');
+// Route::put('/arbitrators-state/{arbitrator}', [ArbitratorController::class, 'updateState'])->name('arbitrators.updateState');
 
-Route::put('/arbitrators', [ArbitratorController::class, 'resetArbitratorsState'])->name('arbitrators.resetState');
+// Route::put('/arbitrators', [ArbitratorController::class, 'resetArbitratorsState'])->name('arbitrators.resetState');
 
-Route::delete('/arbitrators', [ArbitratorController::class, 'delete'])->name('arbitrators.delete');
+// Route::delete('/arbitrators', [ArbitratorController::class, 'delete'])->name('arbitrators.delete');

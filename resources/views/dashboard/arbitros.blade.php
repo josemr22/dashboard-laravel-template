@@ -5,7 +5,6 @@
 <div class="text-right mb-3">
     <button class="btn btn-primary" id="newArbitratorBtn">Nuevo</button>
 </div>
-
 <!-- DataTales Example -->
 <livewire:show-arbitrators />
 
