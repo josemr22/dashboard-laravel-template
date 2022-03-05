@@ -71,7 +71,23 @@
                 title: 'Árbitro Seleccionado:',
                 text: arbitrator.name,
                 allowOutsideClick: false
-            })
+            });
+
+            Swal.fire({
+            title: 'Árbitro Seleccionado:',
+            icon: 'success',
+            html:
+                `
+                <p style="font-size: 2.5rem; font-weight: bold;">${arbitrator.name}</p>
+                <img src="${arbitrator.photo}" width="100px">
+                <p>${arbitrator.description}</p>
+                `,
+            showCloseButton: false,
+            showCancelButton: false,
+            allowOutsideClick: false
+        });
+
+        console.log(arbitrator);
         }, 3000);
     });
 </script>
